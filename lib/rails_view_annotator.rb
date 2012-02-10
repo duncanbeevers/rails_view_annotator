@@ -1,0 +1,3 @@
+require 'rails_view_annotator/action_view/partial_renderer'
+
+RailsViewAnnotator.augment_partial_renderer ActionView::PartialRenderer
