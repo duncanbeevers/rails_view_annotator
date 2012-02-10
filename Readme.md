@@ -6,7 +6,7 @@ The Rails View Annotator simply wraps the rendering of Rails partials with html 
 
 ## Usage
 
-Simply add the gem to you Gemfile's development block.
+Simply add the gem to your Gemfile's development block.
 
 ````ruby
 group :development
