@@ -4,7 +4,9 @@ module RailsViewAnnotator
     klass.send(:define_method, :render) do |*args|
       inner = render.bind(self).call(*args)
       short_identifier = Pathname.new(identifier).relative_path_from Rails.root
-      "<!-- begin: #{short_identifier} -->\n#{inner}<!-- end: #{short_identifier} -->".html_safe
+      if not inner.empty?
+        "<!-- begin: #{short_identifier} -->\n#{inner}<!-- end: #{short_identifier} -->".html_safe
+      end
     end
     klass.send(:include, InstanceMethods)
   end
