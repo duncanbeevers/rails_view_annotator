@@ -17,9 +17,9 @@ end
 Now rendered content will have instructive comments.
 
 ````html
-<!-- begin: app/views/user/_bio.html.haml (from app/views/layouts/user/show.html.haml:4) -->
+<!-- begin: app/views/user/_bio.html.haml (from app/views/user/show.html.haml:4) -->
 <div class='bio'>Ed's Bio</div>
-<!-- end: app/views/user/_bio.html.haml (from app/views/layouts/user/show.html.haml:4) -->
+<!-- end: app/views/user/_bio.html.haml (from app/views/user/show.html.haml:4) -->
 ````
 
 ## License
