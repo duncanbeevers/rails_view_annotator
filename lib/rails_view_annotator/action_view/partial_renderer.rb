@@ -6,6 +6,7 @@ module RailsViewAnnotator
     render = klass.instance_method :render
     klass.send(:define_method, :render) do |*args|
       inner = render.bind(self).call(*args)
+      return unless identifier
       short_identifier = Pathname.new(identifier).relative_path_from Rails.root
 
       backtrace = nil
