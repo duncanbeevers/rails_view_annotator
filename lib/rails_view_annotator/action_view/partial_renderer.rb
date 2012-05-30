@@ -1,7 +1,4 @@
 module RailsViewAnnotator
-  class ContextError < StandardError
-  end
-
   def self.augment_partial_renderer klass
     render = klass.instance_method :render
     klass.send(:define_method, :render) do |*args|
