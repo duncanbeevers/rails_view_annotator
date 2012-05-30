@@ -2,14 +2,14 @@
 
 ## Purpose
 
-The Rails View Annotator simply wraps the rendering of Rails partials with html comments indicating the disk location of the rendered partial.
+The Rails View Annotator wraps the rendering of Rails partials with html comments indicating the disk location of the rendered partial.
 
 ## Usage
 
 Simply add the gem to your Gemfile's development block.
 
 ````ruby
-group :development
+group :development do
   gem 'rails_view_annotator'
 end
 ````
