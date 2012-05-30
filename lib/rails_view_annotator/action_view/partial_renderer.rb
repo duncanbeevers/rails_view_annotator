@@ -9,15 +9,8 @@ module RailsViewAnnotator
       return unless identifier
       short_identifier = Pathname.new(identifier).relative_path_from Rails.root
 
-      backtrace = nil
-      begin
-        raise ContextError
-      rescue ContextError => e
-        backtrace = e.backtrace
-      end
-
       r = /^#{Regexp.escape(Rails.root.to_s)}\/([^:]+:\d+)/
-      backtrace.find { |line| line.match r }
+      caller.find { |line| line.match r }
       called_from = context = $1
 
       descriptor = "#{short_identifier} (from #{called_from})"
