@@ -13,7 +13,11 @@ module RailsViewAnnotator
       descriptor = "#{short_identifier} (from #{called_from})"
 
       if not inner.blank?
-        "<!-- begin: #{descriptor} -->\n#{inner}<!-- end: #{descriptor} -->".html_safe
+        if args[1].has_key?(:formats) && args[1][:formats].include?(:js)
+          "/* begin: #{descriptor} */\n#{inner}/* end: #{descriptor} */".html_safe
+        elsif !args[1].has_key?(:formats) || args[1][:formats].include?(:html)
+          "<!-- begin: #{descriptor} -->\n#{inner}<!-- end: #{descriptor} -->".html_safe
+        end
       end
     end
     klass.send(:include, InstanceMethods)
