@@ -13,11 +13,16 @@ module RailsViewAnnotator
       descriptor = "#{short_identifier} (from #{called_from})"
 
       if not inner.blank?
-        if args[1].has_key?(:formats) && args[1][:formats].include?(:js)
-          "/* begin: #{descriptor} */\n#{inner}/* end: #{descriptor} */".html_safe
-        elsif !args[1].has_key?(:formats) || args[1][:formats].include?(:html)
-          "<!-- begin: #{descriptor} -->\n#{inner}<!-- end: #{descriptor} -->".html_safe
+        comment_pattern = "%{partial}"
+
+        template_formats = Array(args[1][:formats])
+        if template_formats.include?(:js)
+          comment_pattern = "/* begin: %{comment} */\n#{comment_pattern}/* end: %{comment} */"
+        elsif template_formats.empty? || template_formats.include?(:html)
+          comment_pattern = "<!-- begin: %{comment} -->\n#{comment_pattern}<!-- end: %{comment} -->"
         end
+
+        (comment_pattern % {:partial => inner, :comment => descriptor}).html_safe
       end
     end
     klass.send(:include, InstanceMethods)
