@@ -1,5 +1,7 @@
 # Rails View Annotator
 
+[![Build Status](https://travis-ci.org/duncanbeevers/rails_view_annotator.svg?branch=master)](https://travis-ci.org/duncanbeevers/rails_view_annotator)
+
 ## Purpose
 
 The Rails View Annotator wraps the rendering of Rails partials with html comments indicating the disk location of the rendered partial.
