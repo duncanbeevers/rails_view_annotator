@@ -1,0 +1,2 @@
+class FooController < ApplicationController
+end
