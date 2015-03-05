@@ -15,8 +15,14 @@ module RailsViewAnnotator
       short_identifier = Pathname.new(identifier).relative_path_from Rails.root
 
       r = /^#{Regexp.escape(Rails.root.to_s)}\/([^:]+:\d+)/
-      caller.find { |line| line.match r }
-      called_from = context = $1
+      called_from = context = nil
+      caller.each do |line|
+        m = line.match(r)
+        unless m.nil?
+          called_from = context = m[1]
+          break
+        end
+      end
 
       descriptor = "#{short_identifier} (from #{called_from})"
 
