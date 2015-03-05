@@ -1,0 +1,12 @@
+sudo: false
+language: "ruby"
+rvm:
+  - "2.0"
+  - "2.1"
+  - "2.2"
+  - "jruby"
+  - "rbx"
+gemfile:
+  - "gemfiles/Gemfile.rails_4_0.x"
+  - "gemfiles/Gemfile.rails_4_1.x"
+  - "gemfiles/Gemfile.rails_4_2.x"
