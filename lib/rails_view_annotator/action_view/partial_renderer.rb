@@ -21,17 +21,15 @@ module RailsViewAnnotator
       descriptor = "#{short_identifier} (from #{called_from})"
 
       if inner.present?
-        comment_pattern = "%{partial}"
         template_formats = RailsViewAnnotator.extract_requested_formats_from(args)
-        if template_formats.include?(:text) # Do not render any comments for raw plaintext repsonses
-          return inner
-        elsif template_formats.include?(:js)
-          comment_pattern = "/* begin: %{comment} */\n#{comment_pattern}/* end: %{comment} */"
-        elsif template_formats.empty? || template_formats.include?(:html)
-          comment_pattern = "<!-- begin: %{comment} -->\n#{comment_pattern}<!-- end: %{comment} -->"
+        case template_formats.first
+        when :js then
+          "/* begin: #{descriptor} */\n#{inner}/* end: #{descriptor} */"
+        when :html, nil then
+          "<!-- begin: #{descriptor} -->\n#{inner}<!-- end: #{descriptor} -->".html_safe
+        else # Do not render any comments for unrecognized formats
+          inner
         end
-
-        (comment_pattern % {:partial => inner, :comment => descriptor}).html_safe
       end
     end
     klass.send(:include, InstanceMethods)
